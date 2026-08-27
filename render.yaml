@@ -18,13 +18,13 @@ services:
           property: connectionString
       - key: DATABASE_SSL
         value: "false"
-      - key: BANTUS
+      - key: JWT_SECRET
         generateValue: true
-      - key: http://wisdomgateinternationalschool.com
+      - key: CORS_ORIGIN
         sync: false
       - key: SCHOOL_NAME
         value: Wisdom Gate International School
-      - key: BANTUS
+      - key: ADMIN_PASSWORD
         sync: false
 
 databases:
