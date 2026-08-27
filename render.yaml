@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: digi-school
+    runtime: node
+    plan: starter
+    region: frankfurt
+    buildCommand: npm install
+    preDeployCommand: npm run migrate
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: digi-school-db
+          property: connectionString
+      - key: DATABASE_SSL
+        value: "false"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        sync: false
+      - key: SCHOOL_NAME
+        value: Wisdom Gate International School
+      - key: ADMIN_PASSWORD
+        sync: false
+
+databases:
+  - name: digi-school-db
+    plan: basic-256mb
+    region: frankfurt
+    postgresMajorVersion: "16"
+    databaseName: digi_school
+    user: digi_school
+    storageAutoscalingEnabled: true
